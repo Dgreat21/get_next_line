@@ -183,4 +183,6 @@ char				*ft_strchr_safe(const char *s, int c);
 
 char				*ft_strcpy_safe(char *dst, const char *src);
 
+void				*ft_realloc(void *ptr, size_t size);
+
 #endif
