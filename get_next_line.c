@@ -6,7 +6,7 @@
 /*   By: dgreat <dgreat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/27 07:03:22 by dgreat            #+#    #+#             */
-/*   Updated: 2019/05/03 11:01:06 by dgreat           ###   ########.fr       */
+/*   Updated: 2019/05/06 22:16:03 by dgreat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,6 @@ static t_list	*get_file(int fd, t_list *head)
 	return (tmp);
 }
 
-//static int		result(char *line, int len, t_list *head, t_list *file)
-//{
-//	size_t start;
-//
-//	if (!ft_strchr_safe(file->content, '\n'))
-//	{
-//		free(line);
-//		line = ft_memccpy(line, file->content, '\n', ft_strlen(file->content));
-//		start = size_t(ft_strchr(file->content, '\n') - (char *)(file->content) + 1));
-//		file->content = ft_realloc(file->content + start, ft_strlen(file->content + start));
-//		return (1);
-//	}
-//	if (!len && !head)
-//		return (-1);
-//	return (0);
-//}
-
 static int		last_hero()
 {
 	t_list		*list;
@@ -63,13 +46,14 @@ static int		last_hero()
 	return (0);
 }
 
-static int		res(char line, int len, t_list *head, t_list *file)
+static int		result(char line, int len, t_list *head, t_list *file)
 {
 	if (ft_strchr_safe(file->content, '\n'))
 	{
 		free(line);
 		line = ft_memccpy(line, file->content, '\n', ft_strlen(file->content));
-
+		start = size_t(ft_strchr(file->content, '\n') - (char *)(file->content) + 1));
+		file->content = ft_realloc(file->content + start, ft_strlen(file->content + start));
 		return (1);
 	}
 	if (file->content && !len)
