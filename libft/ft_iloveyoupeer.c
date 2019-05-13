@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striter.c                                       :+:      :+:    :+:   */
+/*   ft_iloveyoupeer.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amerlon- <amerlon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/29 15:21:04 by amerlon-          #+#    #+#             */
-/*   Updated: 2018/11/29 16:09:37 by amerlon-         ###   ########.fr       */
+/*   Created: 2018/12/04 20:08:16 by amerlon-          #+#    #+#             */
+/*   Updated: 2018/12/04 21:43:19 by amerlon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_striter(char *s, void (*f)(char *))
-{
-	int i;
+#include "libft.h"
 
-	if (!s || !f)
-		return ;
-	i = -1;
-	while (s[++i])
-		(*f)(s + i);
+void	ft_iloveyoupeer(void)
+{
+	write(1, "You my favourite peer <3", 24);
 }

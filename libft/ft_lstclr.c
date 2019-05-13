@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_word_counter.c                                  :+:      :+:    :+:   */
+/*   ft_lstclr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgreat <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: amerlon- <amerlon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/11 22:33:33 by dgreat            #+#    #+#             */
-/*   Updated: 2019/04/22 17:18:11 by dgreat           ###   ########.fr       */
+/*   Created: 2018/12/01 20:38:13 by amerlon-          #+#    #+#             */
+/*   Updated: 2018/12/01 20:53:47 by amerlon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_word_counter(char const *s, char c)
+void	ft_lstclr(t_list *lst)
 {
-	int		count;
-	char	*tmp;
+	t_list	*temp;
 
-	tmp = (char *)s;
-	count = 0;
-	while (*tmp)
+	while (lst)
 	{
-		while (*tmp && *tmp == c)
-			tmp++;
-		if (*tmp)
-			count++;
-		while (*tmp && *tmp != c)
-			tmp++;
+		temp = lst;
+		lst = lst->next;
+		free(temp->content);
+		free(temp);
 	}
-	return (count);
 }

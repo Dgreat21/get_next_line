@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr_safe.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgreat <dgreat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amerlon- <amerlon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/25 17:59:15 by dgreat            #+#    #+#             */
-/*   Updated: 2019/04/25 18:03:20 by dgreat           ###   ########.fr       */
+/*   Created: 2018/12/11 19:30:33 by amerlon-          #+#    #+#             */
+/*   Updated: 2018/12/11 19:31:40 by amerlon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,15 @@
 
 char	*ft_strchr_safe(const char *s, int c)
 {
+	int i;
+
 	if (!s)
 		return (NULL);
-	return (ft_strchr(s, c));
+	i = -1;
+	while (s[++i])
+		if (s[i] == c)
+			return ((char *)(s + i));
+	if (c == '\0')
+		return ((char *)(s + i));
+	return (NULL);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup_safe.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgreat <dgreat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amerlon- <amerlon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/25 17:56:01 by dgreat            #+#    #+#             */
-/*   Updated: 2019/04/25 17:58:04 by dgreat           ###   ########.fr       */
+/*   Created: 2018/12/11 19:35:19 by amerlon-          #+#    #+#             */
+/*   Updated: 2018/12/11 19:35:35 by amerlon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,17 @@
 
 char	*ft_strdup_safe(const char *s1)
 {
+	int		i;
+	char	*res;
+
 	if (!s1)
 		return (NULL);
-	return (ft_strdup(s1));
+	i = -1;
+	res = (char *)malloc((ft_strlen(s1) + 1) * sizeof(char));
+	if (!res)
+		return (NULL);
+	while (s1[++i])
+		res[i] = s1[i];
+	res[i] = '\0';
+	return (res);
 }

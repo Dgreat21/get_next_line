@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy_safe.c                                   :+:      :+:    :+:   */
+/*   ft_strmjoin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgreat <dgreat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amerlon- <amerlon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/25 18:08:33 by dgreat            #+#    #+#             */
-/*   Updated: 2019/04/25 18:08:55 by dgreat           ###   ########.fr       */
+/*   Created: 2018/12/09 12:50:36 by amerlon-          #+#    #+#             */
+/*   Updated: 2018/12/09 12:50:48 by amerlon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strcpy_safe(char *dst, const char *src)
+char	*ft_strmjoin(char *s1, char *s2)
 {
-	if (!dst && !src)
+	if (!s1 && !s2)
 		return (NULL);
-	return (ft_strcpy(dst, src));
+	if (!s1)
+		return (ft_strjoin("", s2));
+	if (!s2)
+		return (ft_strjoin(s1, ""));
+	return (ft_strjoin(s1, s2));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgreat <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: amerlon- <amerlon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/05 14:48:58 by dgreat            #+#    #+#             */
-/*   Updated: 2019/04/26 21:29:27 by dgreat           ###   ########.fr       */
+/*   Created: 2018/11/26 16:18:26 by amerlon-          #+#    #+#             */
+/*   Updated: 2018/11/27 20:03:47 by amerlon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,21 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	char			*pdst;
-	const char		*psrc;
-	size_t			i;
+	char		*ndst;
+	const char	*nsrc;
+	size_t		i;
 
-	psrc = src;
-	pdst = dst;
-	i = 0;
-	if (pdst > psrc)
-	{
+	ndst = dst;
+	nsrc = src;
+	i = -1;
+	if (ndst > nsrc)
 		while (len > 0)
 		{
 			--len;
-			pdst[len] = psrc[len];
+			ndst[len] = nsrc[len];
 		}
-	}
-	else if (pdst < psrc)
-	{
-		while (i < len)
-		{
-			pdst[i] = psrc[i];
-			i++;
-		}
-	}
+	else if (ndst < nsrc)
+		while (++i < len)
+			ndst[i] = nsrc[i];
 	return (dst);
 }

@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pow_uint.c                                      :+:      :+:    :+:   */
+/*   ft_strshift.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgreat <dgreat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amerlon- <amerlon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/22 17:47:13 by dgreat            #+#    #+#             */
-/*   Updated: 2019/04/22 17:47:19 by dgreat           ###   ########.fr       */
+/*   Created: 2018/12/04 20:22:23 by amerlon-          #+#    #+#             */
+/*   Updated: 2018/12/09 14:43:10 by amerlon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_pow_uint(int x, unsigned int a)
+char	*ft_strshift(char **str, size_t n)
 {
-	int		tmp;
+	char	*res;
 
-	if (a == 0)
-		return (1);
-	else if (a == 1)
-		return (x);
-	tmp = x;
-	while (a - 1)
-	{
-		x *= tmp;
-		a--;
-	}
-	return (x);
+	if (!str || !(*str))
+		return (NULL);
+	res = ft_strsub(*str, n, ft_strlen(*str) - n);
+	if (!res)
+		return (NULL);
+	free(*str);
+	*str = NULL;
+	return (res);
 }

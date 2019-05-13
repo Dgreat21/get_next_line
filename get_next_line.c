@@ -3,88 +3,128 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgreat <dgreat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amerlon- <amerlon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/27 07:03:22 by dgreat            #+#    #+#             */
-/*   Updated: 2019/05/06 22:16:03 by dgreat           ###   ########.fr       */
+/*   Created: 2018/12/06 12:24:33 by amerlon-          #+#    #+#             */
+/*   Updated: 2018/12/15 15:06:03 by amerlon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-** #include "get_next_line.h"
-*/
+#include "get_next_line.h"
+#include <fcntl.h>
+#include <stdio.h>
 
-#include "libft/libft.h"
-#include <sys/types.h>
-#include <sys/uio.h>
-#define BUFF_SIZE 32
-
-static t_list	*get_file(int fd, t_list *head)
+static t_list	*t_list_create_file(int fd)
 {
-	t_list			*tmp;
+	t_list	*res;
+
+	res = (t_list *)malloc(sizeof(t_list));
+	if (!res)
+		return (NULL);
+	res->content = ft_strnew(0);
+	if (!res->content)
+	{
+		free(res);
+		return (NULL);
+	}
+	res->content_size = fd;
+	res->next = NULL;
+	return (res);
+}
+
+static t_list	*get_file(int fd, t_list **head)
+{
+	t_list	*now;
 
 	if (!head || fd < 0)
 		return (NULL);
-	tmp = head;
-	while (tmp)
+	now = *head;
+	while (now)
 	{
-		if (tmp->content_size == (size_t)fd)
-			return (tmp);
-		tmp = tmp->next;
+		if (now->content_size == (size_t)fd)
+			return (now);
+		now = now->next;
 	}
-	if (!(tmp = ft_lstnew(ft_strnew(0), fd)))
+	now = t_list_create_file(fd);
+	if (!now)
 		return (NULL);
-	ft_lstadd(&head, tmp);
-	return (tmp);
+	ft_lstadd(head, now);
+	return (now);
 }
 
-static int		last_hero()
+static int		ft_lstdelfile(t_list **head, int fd)
 {
-	t_list		*list;
-	t_list		*plist;
+	t_list	*now;
+	t_list	*prev;
 
+	if ((!head || !(now = *head) || fd < 0))
+		return (0);
+	if ((now->content_size == (size_t)fd) && !(prev = NULL))
+	{
+		free(now->content);
+		*head = now->next;
+		free(now);
+		return (0);
+	}
+	while (now)
+	{
+		if (now->content_size == (size_t)fd)
+		{
+			free(now->content);
+			prev ? (prev->next = now->next) : (0);
+			free(now);
+			return (0);
+		}
+		prev = now;
+		now = now->next;
+	}
 	return (0);
 }
 
-static int		result(char line, int len, t_list *head, t_list *file)
+static int		make_return_value(t_list *file, t_list **head,
+									int len, char **line)
 {
 	if (ft_strchr_safe(file->content, '\n'))
 	{
-		free(line);
-		line = ft_memccpy(line, file->content, '\n', ft_strlen(file->content));
-		start = size_t(ft_strchr(file->content, '\n') - (char *)(file->content) + 1));
-		file->content = ft_realloc(file->content + start, ft_strlen(file->content + start));
+		free(*line);
+		*line = ft_copyuntil(file->content, '\n');
+		file->content = ft_strshift((char **)&(file->content),
+			ft_strchr(file->content, '\n') - (char *)(file->content) + 1);
 		return (1);
 	}
 	if (file->content && !len)
 	{
+		if (((char *)(file->content))[0] == '\0')
+			return (ft_lstdelfile(head, file->content_size));
+		ft_strdel((char **)&(file->content));
 		return (1);
 	}
-	return (last_hero());
+	return (ft_lstdelfile(head, file->content_size));
 }
 
 int				get_next_line(const int fd, char **line)
 {
 	static t_list	*head;
 	t_list			*file;
+	char			buff[BUFF_SIZE + 1];
 	int				len;
-	char			buf[BUFF_SIZE + 1];
-	char			*tmp;
+	char			*temp;
 
-	if (!line || fd < 0 || read(fd, buf, 0) < 0)
-		return (-1);
-	if (!(file = get_file(fd, head)))
+	if (fd < 0 || !line || (read(fd, buff, 0) < 0))
 		return (-1);
 	len = 1;
-	while (ft_strchr_safe(file->content, '\n') && len)
+	file = get_file(fd, &head);
+	temp = NULL;
+	while (!(ft_strchr_safe(file->content, '\n')) && len)
 	{
-		len = read(file->content_size, buf, BUFF_SIZE);
-		buf[len] = 0;
-		tmp = ft_strjoin(file->content, buf);
+		free(temp);
+		temp = NULL;
+		len = read(file->content_size, buff, BUFF_SIZE);
+		buff[len] = '\0';
+		temp = ft_strjoin((char *)(file->content), buff);
 		free(file->content);
-		file->content = ft_strdup_safe(tmp);
-		free(tmp);
+		file->content = ft_strdup_safe(temp);
 	}
-	*line = file->content;
-	return (result(*line, len, head, file));
+	*line = temp;
+	return (make_return_value(file, &head, len, line));
 }

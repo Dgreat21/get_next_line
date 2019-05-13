@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lst_clear.c                                     :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgreat <dgreat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amerlon- <amerlon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/23 20:52:19 by dgreat            #+#    #+#             */
-/*   Updated: 2019/04/23 22:56:00 by dgreat           ###   ########.fr       */
+/*   Created: 2018/12/04 19:38:01 by amerlon-          #+#    #+#             */
+/*   Updated: 2018/12/04 21:42:02 by amerlon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lst_clear(t_list *lst)
+char	*ft_strndup(const char *s1, size_t n)
 {
-	t_list	*tmp;
+	char	*res;
+	size_t	i;
+	size_t	len;
 
-	while (lst)
-	{
-		tmp = lst;
-		lst = lst->next;
-		free(tmp->content);
-		free(tmp);
-	}
+	len = ft_strlen(s1);
+	len = n < len ? n : len;
+	res = ft_strnew(len);
+	if (!res)
+		return (NULL);
+	i = -1;
+	while (++i < len)
+		res[i] = s1[i];
+	return (res);
 }

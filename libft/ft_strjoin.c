@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgreat <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: amerlon- <amerlon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/04 06:51:56 by dgreat            #+#    #+#             */
-/*   Updated: 2019/04/15 19:00:45 by dgreat           ###   ########.fr       */
+/*   Created: 2018/11/29 17:44:37 by amerlon-          #+#    #+#             */
+/*   Updated: 2018/12/06 21:43:53 by amerlon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,20 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
+	char	*res;
 	int		i;
 	int		j;
-	char	*dest;
 
 	if (!s1 || !s2)
 		return (NULL);
-	i = ft_strlen(s1) + ft_strlen(s2);
-	if ((dest = (char *)malloc(sizeof(char) * (i + 1))) == NULL)
+	res = ft_strnew(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!res)
 		return (NULL);
-	i = 0;
-	while (s1[i])
-	{
-		dest[i] = s1[i];
-		i++;
-	}
-	j = 0;
-	while (s2[j])
-	{
-		dest[i] = s2[j];
-		i++;
-		j++;
-	}
-	dest[i] = s2[j];
-	return (dest);
+	i = -1;
+	while (s1[++i])
+		res[i] = s1[i];
+	j = -1;
+	while (s2[++j])
+		res[i + j] = s2[j];
+	return (res);
 }
