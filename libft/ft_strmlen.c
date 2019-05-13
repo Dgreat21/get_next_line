@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_copyuntil.c                                     :+:      :+:    :+:   */
+/*   ft_strmlen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amerlon- <amerlon-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dgreat <dgreat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/04 21:29:51 by amerlon-          #+#    #+#             */
-/*   Updated: 2018/12/04 21:39:28 by amerlon-         ###   ########.fr       */
+/*   Created: 2019/04/12 17:31:37 by dgreat            #+#    #+#             */
+/*   Updated: 2019/04/23 23:20:27 by dgreat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_copyuntil(char *str, int c)
+size_t	ft_strmlen(const char *str, char c)
 {
-	char	*res;
-	char	*symb;
+	char *s;
 
-	if (!str)
-		return (NULL);
-	symb = ft_strchr(str, c);
-	if (!symb)
-		return (NULL);
-	res = ft_strnew(symb - str);
-	if (!res)
-		return (NULL);
-	res = ft_strncpy(res, str, symb - str);
-	return (res);
+	s = (char *)str;
+	while (*s && *s != c)
+		++s;
+	return (s - str);
 }

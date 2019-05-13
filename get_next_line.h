@@ -3,22 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amerlon- <amerlon-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dgreat <dgreat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/06 13:16:42 by amerlon-          #+#    #+#             */
-/*   Updated: 2018/12/15 13:59:42 by amerlon-         ###   ########.fr       */
+/*   Created: 2019/05/02 19:18:34 by dgreat            #+#    #+#             */
+/*   Updated: 2019/05/13 00:03:46 by dgreat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# define BUFF_SIZE 72
 
-# include <sys/types.h>
-# include <sys/uio.h>
-# include <unistd.h>
-# include "libft/libft.h"
+# include <fcntl.h>
+# define BUFF_SIZE 10000
 
-int	get_next_line(const int fd, char **line);
+typedef struct		s_mlist
+{
+	void			*data;
+	size_t			size;
+	int				x;
+}					t_mlist;
+
+enum				e_strings{glue, duplicate, linebreak};
+
+int					get_next_line(const int fd, char **line);
 
 #endif

@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_nbrlen.c                                        :+:      :+:    :+:   */
+/*   ft_degree_base.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amerlon- <amerlon-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dgreat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/29 21:05:34 by amerlon-          #+#    #+#             */
-/*   Updated: 2018/12/04 21:40:10 by amerlon-         ###   ########.fr       */
+/*   Created: 2019/04/15 21:31:07 by dgreat            #+#    #+#             */
+/*   Updated: 2019/04/25 18:29:44 by dgreat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_nbrlen(int c)
+int		ft_log(long n, size_t base)
 {
-	int	i;
+	int count;
 
-	i = 0;
-	if (!c)
-		return (1);
-	while (c)
+	count = 1;
+	n /= base;
+	while (n)
 	{
-		c /= 10;
-		i++;
+		n /= base;
+		count++;
 	}
-	return (i);
+	return (count);
 }

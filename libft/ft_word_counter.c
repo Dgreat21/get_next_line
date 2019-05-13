@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_wordcount.c                                     :+:      :+:    :+:   */
+/*   ft_word_counter.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amerlon- <amerlon-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dgreat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/29 22:22:28 by amerlon-          #+#    #+#             */
-/*   Updated: 2018/12/01 16:13:15 by amerlon-         ###   ########.fr       */
+/*   Created: 2019/04/11 22:33:33 by dgreat            #+#    #+#             */
+/*   Updated: 2019/04/22 17:18:11 by dgreat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_wordcount(const char *str, char del)
+int		ft_word_counter(char const *s, char c)
 {
-	int	i;
-	int	wc;
-	int	flag;
+	int		count;
+	char	*tmp;
 
-	if (!str || del == '\0')
-		return (-1);
-	i = -1;
-	wc = 0;
-	flag = 0;
-	while (str[++i])
+	tmp = (char *)s;
+	count = 0;
+	while (*tmp)
 	{
-		if (str[i] == del)
-			flag = 0;
-		else if (!flag)
-		{
-			flag = 1;
-			wc++;
-		}
+		while (*tmp && *tmp == c)
+			tmp++;
+		if (*tmp)
+			count++;
+		while (*tmp && *tmp != c)
+			tmp++;
 	}
-	return (wc);
+	return (count);
 }

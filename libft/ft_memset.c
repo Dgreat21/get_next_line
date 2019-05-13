@@ -3,25 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amerlon- <amerlon-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dgreat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/22 20:00:53 by amerlon-          #+#    #+#             */
-/*   Updated: 2018/11/27 20:05:00 by amerlon-         ###   ########.fr       */
+/*   Created: 2019/04/04 06:18:27 by dgreat            #+#    #+#             */
+/*   Updated: 2019/04/22 18:38:00 by dgreat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *b, int c, size_t len)
+void	*ft_memset(void *dest, int c, size_t n)
 {
-	char	*now;
-	int		i;
+	unsigned char	*cptr;
+	unsigned long	*lptr;
+	unsigned char	uc;
+	unsigned long	ul;
+	size_t			mod;
 
-	if (len == 0)
-		return (b);
-	now = (char *)b;
-	i = -1;
-	while (++i < (int)len)
-		now[i] = c;
-	return (b);
+	lptr = (unsigned long *)dest;
+	uc = (unsigned char)c;
+	ul = (unsigned long)uc;
+	mod = sizeof(unsigned long);
+	ul *= 0x101010101010101;
+	mod = n / sizeof(unsigned long);
+	while (mod--)
+		*(lptr++) = ul;
+	mod = n % sizeof(unsigned long);
+	cptr = (unsigned char *)lptr;
+	while (mod--)
+		*(cptr++) = uc;
+	return (dest);
 }

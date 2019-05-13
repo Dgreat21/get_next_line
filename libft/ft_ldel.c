@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmjoin.c                                      :+:      :+:    :+:   */
+/*   ft_ldel.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amerlon- <amerlon-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dgreat <dgreat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/09 12:50:36 by amerlon-          #+#    #+#             */
-/*   Updated: 2018/12/09 12:50:48 by amerlon-         ###   ########.fr       */
+/*   Created: 2019/05/06 21:56:33 by dgreat            #+#    #+#             */
+/*   Updated: 2019/05/09 02:29:48 by dgreat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strmjoin(char *s1, char *s2)
+t_list	*ft_ldel(t_list *prev, t_list *curr)
 {
-	if (!s1 && !s2)
-		return (NULL);
-	if (!s1)
-		return (ft_strjoin("", s2));
-	if (!s2)
-		return (ft_strjoin(s1, ""));
-	return (ft_strjoin(s1, s2));
+	prev->next = curr->next;
+	curr->next = NULL;
+	free(curr->content);
+	free(curr);
+	curr = NULL;
+	return (prev);
 }

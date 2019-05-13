@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoinch.c                                     :+:      :+:    :+:   */
+/*   ft_strcpy_safe.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amerlon- <amerlon-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dgreat <dgreat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/04 21:17:54 by amerlon-          #+#    #+#             */
-/*   Updated: 2018/12/04 21:28:14 by amerlon-         ###   ########.fr       */
+/*   Created: 2019/04/25 18:08:33 by dgreat            #+#    #+#             */
+/*   Updated: 2019/04/25 18:08:55 by dgreat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoinch(char **str, char c)
+char	*ft_strcpy_safe(char *dst, const char *src)
 {
-	char	*res;
-
-	if (!str || !(*str))
+	if (!dst && !src)
 		return (NULL);
-	res = ft_strnew(ft_strlen(*str) + 1);
-	if (!res)
-		return (NULL);
-	res = ft_strcpy(res, *str);
-	res = ft_strncat(res, &c, 1);
-	free(*str);
-	*str = NULL;
-	return (res);
+	return (ft_strcpy(dst, src));
 }

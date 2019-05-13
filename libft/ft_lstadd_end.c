@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_nextword.c                                      :+:      :+:    :+:   */
+/*   ft_lstadd_end.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amerlon- <amerlon-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dgreat <dgreat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/01 16:52:51 by amerlon-          #+#    #+#             */
-/*   Updated: 2018/12/01 17:01:23 by amerlon-         ###   ########.fr       */
+/*   Created: 2019/04/23 21:46:52 by dgreat            #+#    #+#             */
+/*   Updated: 2019/04/23 21:50:20 by dgreat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_nextword(char const *s, char c)
+t_list	*ft_lstadd_end(t_list *head, t_list *elem)
 {
-	int	i;
-
-	i = -1;
-	if (!s || c == '\0')
-		return (NULL);
-	while (s[++i] && s[i] != c)
-		;
-	while (s[i] && s[i] == c)
-		i++;
-	if (!s[i])
-		return (NULL);
-	return ((char *)s + i);
+	if (!head)
+		return (elem);
+	while (head->next)
+		head = head->next;
+	head->next = elem;
+	return (head);
 }

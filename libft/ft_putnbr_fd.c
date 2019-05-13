@@ -3,29 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amerlon- <amerlon-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dgreat <dgreat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/27 22:21:26 by amerlon-          #+#    #+#             */
-/*   Updated: 2018/12/04 22:02:10 by amerlon-         ###   ########.fr       */
+/*   Created: 2019/04/12 19:17:09 by dgreat            #+#    #+#             */
+/*   Updated: 2019/04/19 18:34:34 by dgreat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr_fd(int n, int fd)
+void		ft_putnbr_fd(int nb, int fd)
 {
-	if (n == -2147483648)
-		write(fd, "-2147483648", 11);
-	else if (n < 0)
+	int		len;
+	int		f;
+	long	n;
+
+	n = (long)nb;
+	f = (n >= 0) ? (0) : (1);
+	n = (n >= 0) ? n : -n;
+	len = ft_log(n, 10);
+	if (f == 1)
+		ft_putchar_fd('-', fd);
+	while (len)
 	{
-		write(fd, "-", 1);
-		ft_putnbr_fd(-n, fd);
+		f = ft_pow_uint(10, len - 1);
+		ft_putchar_fd(n / f + '0', fd);
+		len--;
+		n %= f;
 	}
-	else if (n > 9)
-	{
-		ft_putnbr_fd(n / 10, fd);
-		ft_putchar_fd(n % 10 + 48, fd);
-	}
-	else
-		ft_putchar_fd(n + 48, fd);
 }
